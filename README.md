@@ -56,6 +56,13 @@ Claude Code picks up new agent files within a few seconds. Restart only if the `
 
 The agent checks all of this on its first run and tells you what is missing. It never installs these for you without asking.
 
+### Troubleshooting on Windows
+
+- **`doctor` says Chrome failed (`ETIMEDOUT`)** — HyperFrames could not use your installed Chrome. Download its own headless copy, which it uses only for rendering: `npx hyperframes browser ensure`.
+- **Optional local voice (Kokoro) and music (MusicGen)** need Python. HyperFrames tries `python3`, then `python`, then `py -3`, and uses the first that works — install the packages into that same Python: `python3 -m pip install kokoro-onnx soundfile transformers torch numpy`. PyTorch alone is about 1 GB.
+- **Optional transcription (Whisper)** — no compiler needed. Download `whisper-bin-x64.zip` from the [whisper.cpp releases](https://github.com/ggml-org/whisper.cpp/releases), unzip it anywhere permanent, and set the user environment variable `HYPERFRAMES_WHISPER_PATH` to the full path of `whisper-cli.exe`.
+- **`doctor` warns about low memory** — close other apps before rendering; renders can fail when little RAM is free.
+
 ## Use
 
 ### Talk to it directly (recommended)
