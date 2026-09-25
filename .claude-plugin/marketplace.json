@@ -1,0 +1,15 @@
+{
+  "name": "tamimmobarak-plugins",
+  "description": "Community Claude Code plugins by TamimMobarak. Unofficial; not affiliated with HeyGen or Anthropic.",
+  "owner": {
+    "name": "TamimMobarak",
+    "url": "https://github.com/TamimMobarak"
+  },
+  "plugins": [
+    {
+      "name": "hyperframes-manager",
+      "source": "./plugins/hyperframes-manager",
+      "description": "Subagent that creates, edits, previews and renders HyperFrames (HTML-to-video) projects from plain-language instructions. Unofficial."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "hyperframes-manager",
+  "version": "1.0.0",
+  "description": "Subagent that creates, edits, previews and renders HyperFrames (HTML-to-video) projects from plain-language instructions. Unofficial; not affiliated with HeyGen or Anthropic.",
+  "author": {
+    "name": "TamimMobarak",
+    "url": "https://github.com/TamimMobarak"
+  },
+  "homepage": "https://github.com/TamimMobarak/claude-hyperframes-manager",
+  "repository": "https://github.com/TamimMobarak/claude-hyperframes-manager",
+  "license": "Apache-2.0",
+  "keywords": ["hyperframes", "video", "html-to-video", "subagent", "rendering"]
+}
