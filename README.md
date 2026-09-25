@@ -101,6 +101,7 @@ Tell it where to keep your videos the first time. It uses a permanent folder and
 - Edits existing projects, tracking its changes with HyperFrames project history so they can be undone.
 - Searches the HyperFrames catalog for ready-made effects before hand-writing animation.
 - Runs the quality gates (`lint`, `check`, snapshots) before calling anything done.
+- Holds itself to a creative quality bar, not only a technical one. It asks for reference videos and studies them frame by frame, makes still style frames before animating, and says up front when a brief needs something it can't make convincingly in HTML (live action, photoreal people, detailed characters). After rendering it reviews its own frames, scores hook, motion, typography, composition, depth, pacing, sound and brand fit, and iterates on anything weak. Its report includes those scores alongside the checks.
 - Opens a preview and **waits for your approval before rendering**, then verifies the file with `ffprobe`.
 - Keeps a `HYPERFRAMES_MANAGER.md` state file in your video folder, so it picks up where it left off.
 
@@ -124,7 +125,7 @@ On first run it also tells you that the HyperFrames CLI sends anonymous usage te
 
 `Read, Write, Edit, Bash, Glob, Grep, WebFetch, Skill, Agent, AskUserQuestion`. It runs commands and edits files because building and rendering video needs both. `Skill` loads the HyperFrames skills; `Agent` lets HyperFrames workflows hand frames to helper agents (without it, frames are built one at a time); `AskUserQuestion` is used in direct mode.
 
-Always-on cost is about 70 tokens per session; a run loads about 3,200 tokens of instructions. Review [the agent file](plugins/hyperframes-manager/agents/hyperframes-manager.md) before installing, as you should with any agent.
+Always-on cost is about 70 tokens per session; a run loads about 4,200 tokens of instructions. Review [the agent file](plugins/hyperframes-manager/agents/hyperframes-manager.md) before installing, as you should with any agent.
 
 ## Repository layout
 

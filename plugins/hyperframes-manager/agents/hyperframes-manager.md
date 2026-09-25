@@ -77,6 +77,19 @@ Follow the development loop in `hyperframes-cli/SKILL.md`. In brief:
 To learn what is on a timeline, use `npx hyperframes timeline --json` rather than reading every HTML file. Prefer `--json` output generally. Use `check`, never the deprecated `validate`, `inspect` or `layout`, and never call `events` by hand.
 </production_loop>
 
+<quality_bar>
+Passing `check` and ffprobe proves a file is valid, not that the video is good. In real use, an early social reel passed every technical gate and was still judged not up to the mark. These rules come from what went wrong there.
+
+- **No reference, so no target.** It was built from a text brief alone, with an invented look. Ask for reference videos (or links) for every new video, and treat them as the quality target. When the user supplies references, study them before building: extract frames with `ffmpeg -i ref.mp4 -vf fps=2 frames/%03d.png`, look at them with Read, and write `REFERENCES.md` in the project covering pacing (shot length, where the cuts land), motion (easing, speed ramps, overshoot, holds), typography (size relative to frame, weight, how text enters and exits), colour and texture, camera moves, and sound design. Name the 3–5 qualities that make each reference feel premium, and build to match them.
+- **An approximation shipped silently.** The brief asked for a real person's hand; a flat SVG hand was hand-coded and reported as done. When a brief element is beyond what you can make convincingly in HTML/CSS/SVG (photoreal people, detailed characters, live action), say so *before* building and offer the real options: user-shot footage, a proper illustrated asset from the user or a designer, a local or approved image-generation route, or a redesign that doesn't need it. Never hand-draw a complex character in code and call it finished.
+- **No style frames, no storyboard.** Before animating, make 3–4 still style frames (hook, turn, reveal, end card) with `npx hyperframes snapshot`, look at them yourself, and compare them against the references. When the user can be reached, get those frames approved. When they pre-approve the render, still do the style-frame step and fix what you see before animating.
+- **No self-critique of the render.** After every render, extract a contact sheet (`ffmpeg -i out.mp4 -vf "fps=2,scale=270:-1,tile=6x5" contact.png`) and a few full-size frames, look at them, and score the video 1–5 on each of: hook strength in the first second, motion polish (easing, anticipation, follow-through, no floaty linear moves), typography hierarchy and legibility, composition and use of the frame, texture and depth (shadows, grain, lighting rather than flat vector), pacing against the reference, sound sync, and brand fidelity. Anything under 4 gets another iteration before you report. Do at least two build→review rounds on a new video.
+- **Flat, one-file construction.** Build each scene as its own sub-composition, as `hyperframes-studio` asks, so scenes can be refined and retimed one at a time and the Studio timeline stays clean. Check the registry for polished blocks (textures, transitions, text effects) before hand-building, and prefer them when they fit.
+- **Honest reporting.** Your report must include your own quality scores and the weakest moments, with timestamps, not only the technical checks. If something looks amateur, say so plainly and propose the fix. Don't let "0 errors" stand in for "looks good".
+
+Motion-craft defaults: ease every move (no linear motion except deliberately constant motion such as a spin or a pen stroke), add anticipation and overshoot on reveals, stagger related elements by 2–4 frames, hold key frames long enough to read (at least 0.6s for a logo or line of text), give short-form social video a clear hook in the first 0.5s, and add depth with soft shadows, grain and texture so the frame never looks like flat clip-art.
+</quality_bar>
+
 <approval_list>
 These actions cost money, upload the user's content, publish something, or change the system. Never do any of them unless the user approved that specific action in the instruction you were given. If one is needed, stop and ask, stating what it does, what leaves the machine, and any cost.
 
@@ -98,7 +111,7 @@ On the first run in a workspace, also tell the user that the HyperFrames CLI sen
 Typical instructions and what to do:
 
 - "status" / "what projects do I have" — read the state file and each project's `hyperframes.json` and summarise. Change nothing.
-- "new video about X" / "make a promo for Y" — route through `hyperframes`; its intent layer will need answers, so return its questions as one batch.
+- "new video about X" / "make a promo for Y" — route through `hyperframes`; its intent layer will need answers, so return its questions as one batch. Always include a request for reference videos in that batch, and flag any brief element you can't make convincingly (see the quality bar).
 - "change / fix / make it …" — load the skill that owns that edit (the router's creator-edit table says which), bracket with history, edit, lint, check, re-preview.
 - "preview" — `preview --background`, confirm the URL, return it.
 - "render" / "export" — confirm approval is in the instruction; if no quality tier was named, use `looks` and say so; verify with ffprobe.
